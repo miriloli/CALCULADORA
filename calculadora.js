@@ -1,118 +1,141 @@
-const pantalla=document.getElementsByClassName("pantalla")[0];
-let operacionSeleccionada=undefined;
-let primerNumero=undefined;
-let segundoNumero=undefined;
-let primerNumeroSeleccionado=false;
+const pantalla = document.getElementsByClassName("pantalla")[0];
+let operacionSeleccionada = "";
+let primerNumero = "";
+let segundoNumero = "";
 
-pantalla.innerHTML=0;
+pantalla.innerHTML = "";
 
-function sumar(){
-    operacionSeleccionada=sumar(); 
-    return primerNumero+segundoNumero;
-}
-function restar(){
-    operacionSeleccionada=restar();
-    return primerNumero-segundoNumero;
+function sumar() {
 
-}
-function multiplicar(){
-    operacionSeleccionada=multiplicar();
-    return primerNumero*segundoNumero;
+    operacionSeleccionada = "sumar";
+    pantalla.innerHTML += "+";
     
 }
-function dividir(){
-    operacionSeleccionada=dividir();
-    return primerNumero/segundoNumero;
-}
-function total(){
-    pantalla.innerHTML=operacionSeleccionada;
-}
-function limpiarPantalla(){
-    pantalla.innerHTML=0;
-    operacionSeleccionada=undefined;
-}
-function uno(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=1;
-    }else{
-        primerNumero=1;
-        primerNumeroSeleccionado=true;
-    }
-}
-function dos(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=2;
-    }else{
-        primerNumero=2;
-        primerNumeroSeleccionado=true;
-    }
-}
-function tres(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=3;
-    }else{
-        primerNumero=3;
-        primerNumeroSeleccionado=true;
-    }
-}
-function cuatro(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=4;
-    }else{
-        primerNumero=4;
-        primerNumeroSeleccionado=true;
-    }
-}
-function cinco(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=5;
-    }else{
-        primerNumero=5;
-        primerNumeroSeleccionado=true;
-    }
-}
-function seis(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=6;
-    }else{
-        primerNumero=6;
-        primerNumeroSeleccionado=true;
-    }
-}
-function siete(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=7;
-    }else{
-        primerNumero=7;
-        primerNumeroSeleccionado=true;
-    }
-}
-function ocho(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=8;
-    }else{
-        primerNumero=8;
-        primerNumeroSeleccionado=true;
-    }
-}
-function nueve(){
-    if (primerNumeroSeleccionado){
-        segundoNumero=9;
-    }else{
-        primerNumero=9;
-        primerNumeroSeleccionado=true;
-    }
-}
-function cero(){
+function restar() {
+
+    operacionSeleccionada = "restar";
+    pantalla.innerHTML += "-";
     
-    if (primerNumeroSeleccionado){
-        segundoNumero=0;
+
+}
+function multiplicar() {
+
+    operacionSeleccionada = "multiplicar";
+    pantalla.innerHTML += "*";
+    
+
+}
+function dividir() {
+
+    operacionSeleccionada = "dividir";
+    pantalla.innerHTML += "/";
+    
+
+}
+function total() {
+    let total = 0;
+
+
+    /**
+     * condicional ternario
+     * 
+     * si el string del primer numero
+     * incluye "." significa que es decimal
+     * entonces lo parseo al numero decimal
+     * si no, entonces lo parseo a numero entero.
+     * 
+     */
+
+
+    const numero1 = (primerNumero.includes('.')) ? parseFloat(primerNumero) : parseInt(primerNumero);
+
+
+
+    /*if (primerNumero.includes('.')==true){
+        const numero1 = parseFloat(primerNumero)
     }else{
-        primerNumero=0;
-        primerNumeroSeleccionado=true;
+        const numero1 = parseInt(primerNumero); 
+    }*/
+
+
+
+
+
+    /**
+     * condicional ternario
+     * 
+     * si el string del segundo numero
+     * incluye . significa que es decimal
+     * entonces lo parseo al numero decimal
+     * si no entonces lo parseo a numero entero
+     * 
+     */
+    const numero2 = (segundoNumero.includes('.')) 
+                ? parseFloat(segundoNumero)
+                 : parseInt(segundoNumero);
+                 
+    console.log('numero1',numero1, 'numero2', numero2);
+    console.log('operacion seleccionada:  ',operacionSeleccionada);
+    
+
+    switch (operacionSeleccionada) {
+
+        case "sumar":
+            total = numero1 + numero2;
+            break;
+
+        case "restar":
+            total = numero1 - numero2;
+            break;
+
+        case "multiplicar":
+            total = numero1 * numero2;
+            break;
+
+        case "dividir":
+            total = numero1 / numero2;
+            break;
+
+        default:
+            break;
+
     }
+
+
+    console.log('total ',total);
+
+    primerNumero = total.toString();
+    
+    pantalla.innerHTML = primerNumero;
+
+}
+
+function limpiarPantalla() {
+
+    operacionSeleccionada = "";
+    pantalla.innerHTML = "";
+    primerNumero= "";
+    segundoNumero="";
+}
+
+function seleccionarNumero(numero) {
+
+    numero = numero.toString();
+    if (operacionSeleccionada !== '') {
+        segundoNumero += numero;
+        console.log('segundo numero', segundoNumero);
+        console.log('operacion seleccionada:  ',operacionSeleccionada);
+    } else {
+        primerNumero += numero;
+        console.log('primer numero', primerNumero);
+    }
+    
+    
+    pantalla.innerHTML += numero;
+
 }
 
 
 
-//No funciona nada jaja
+
+
